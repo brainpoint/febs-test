@@ -15,33 +15,46 @@ npm install febs-test --save
 # Example
 
 ```js
+'use strict';
+/**
+* Copyright (c) 2017 Copyright brainpoint All Rights Reserved.
+* Author: lipengxiang
+* Date: 
+* Desc: 
+*/
+
 var test = require('febs-test');
 var http = require('http');
 
+//
+// test work.
+function test_work(){ // or async function test_work() {
+    // todo.
+    test.add_count('request', 1);
+    let token = test.begin('request nodjes');
+    http.get('http://nodejs.org/dist/index.json', (res) => {
+      const { statusCode } = res;
+      let error;
+      if (statusCode !== 200) {
+        test.end_custom(token, statusCode.toString());
+      } else {
+        test.end_success(token);
+      }
+
+      test.finish();
+    }).on('error', (e) => {
+      test.end_failure(token);
+    });
+}
+
+//
+// begin test.
 test.start({
-            clientTotal : 100,          // 客户端总数.
+            clientTotal: 100,          // 客户端总数.
             clientNumPerProcess: 10,  // 每个进程模拟的客户端个数. 默认50个.
-            createDurtion : 10000,        // in ms, 模拟客户端在此时间段内创建完成. 默认10000
+            createDurtion: 5000,        // in ms, 模拟客户端在此时间段内创建完成. 默认10000
             testDurtion : 20000,          // in ms, 测试的持续时间.
-          }, function(){
-            
-              // todo.
-              let token = test.test_begin('request nodjes');
-              http.get('http://nodejs.org/dist/index.json', (res) => {
-                const { statusCode } = res;
-                let error;
-                if (statusCode !== 200) {
-                  test.test_end_failure(token);
-                } else {
-                  test.test_end_success(token);
-                }
-
-                test.finish();
-              }).on('error', (e) => {
-                test.test_end_failure(token);
-              });
-          });
-
+          }, test_work);
 ```
 
 result: 
@@ -53,42 +66,46 @@ result:
        *        - cpu numbers:  4
        *        - cpu type:     undefined undefined MHz
        *        - total memory: 4096 MB
-       *        - free memory:  141 MB
+       *        - free memory:  191 MB
        * ----------------------------------------------------------
        *      config of:
        *        - client total:                  100
        *        - client number in per process:  10
-       *        - client create durtion:         10000 ms
+       *        - client create durtion:         5000 ms
        *        - process number:                10
        *        - test durtion:                  20 s
        *        - logfile:
        *        - errfile:
        ************************************************************
 
-[start at: 2017-10-25 20:19:58]
-[2017-10-25 20:19:58.716] [INFO] info - [start at: 2017-10-25 20:19:58]
+[start at: 2017-10-26 13:51:14]
+⠋ Testing...
+⠧ Testing... ...25%
+⠇ Testing... ...50%
+⠼ Testing...
 
-[2017-10-25 20:20:12.913] [INFO] info -
 ------------------------------------
 - key count                        -
 ------------------------------------
+    [request]            : 100
 
 ------------------------------------
 - statistics                       -
 ------------------------------------
     [request nodjes]:
         request          : 100
+        timeout          : 0
+        success          : 100
+               delay-avg : 1944 ms
+               delay-max : 8303 ms
+               delay-min : 414 ms
         failure          : 0
-        delayInSuccessAvg: 1274 ms
-        delayInSuccessMax: 3741 ms
-        delayInSuccessMin: 421 ms
-        delayInFailureAvg: 0 ms
-        delayInFailureMax: 0 ms
-        delayInFailureMin: 0 ms
+               delay-avg : 0 ms
+               delay-max : 0 ms
+               delay-min : 0 ms
 
-[finish at: 2017-10-25 20:20:12]
-[2017-10-25 20:20:12.912] [INFO] info - [finish at: 2017-10-25 20:20:12]
-
+[finish at: 2017-10-26 13:51:25]
+Test take 12 s
 ```
 
 # Show module debug info.
@@ -130,15 +147,18 @@ function finish()
   * @param type: 测试的类型, 相同的测试类型, 将累加统计.
   * @return: test_token. 
   */
-function test_begin(type)
+function begin(type)
 ```
 
 ```js
 /**
- * @desc: 结束指定的测试token, 并且记录至统计结果中.
- */
-function test_end_success(token)
-function test_end_failure(token)
+* @desc: 结束指定的测试, 并记录统计结果.
+*        end_custom 可以指定除'request', 'timeout' 之外自定义的测试结果类型.
+* @return: 
+*/
+function end_success(token)
+function end_failure(token)
+function end_custom(token, type)
 ```
 
 ```js
