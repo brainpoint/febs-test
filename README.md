@@ -108,10 +108,6 @@ result:
 Test take 12 s
 ```
 
-# Show module debug info.
-
-export DEBUG="test"
-
 # Interface
 
 ```js
