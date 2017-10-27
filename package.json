@@ -4,6 +4,7 @@
   "dependencies": {
     "arrivals": "^2.1.1",
     "debug": "^3.1.0",
+    "febs": "^0.3.5",
     "log4js": "^2.3.9",
     "ora": "^1.3.0",
     "uuid": "^3.1.0"
@@ -34,5 +35,5 @@
   ],
   "main": "./lib",
   "name": "febs-test",
-  "version": "1.1.2"
+  "version": "1.1.3"
 }
