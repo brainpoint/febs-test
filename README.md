@@ -122,7 +122,7 @@ Test take 12 s
             logfile,              // 日志文件位置. null则不会存储.
             errfile,              // 错误日志位置. null则不会存储.
           }
-* @param workCB: function() {}  // 在此回调中编写测试程序.
+* @param workCB: function(pid, tid) {}  // 在此回调中编写测试程序.
 * @return: 
 */
 function start(opt, workCB)

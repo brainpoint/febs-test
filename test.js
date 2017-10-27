@@ -11,7 +11,7 @@ var http = require('http');
 
 //
 // test work.
-function test_work(){ // or async function test_work() {
+function test_work(pid, tid){ // or async function test_work(pid, tid) {
     // todo.
     test.add_count('request', 1);
     let token = test.begin('request nodjes');
