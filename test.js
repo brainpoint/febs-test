@@ -37,4 +37,5 @@ test.start({
             clientNumPerProcess: 10,  // 每个进程模拟的客户端个数. 默认50个.
             createDurtion: 5000,        // in ms, 模拟客户端在此时间段内创建完成. 默认10000
             testDurtion : 20000,          // in ms, 测试的持续时间.
+            debug: false
           }, test_work);

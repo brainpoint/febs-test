@@ -121,6 +121,7 @@ Test take 12 s
             testDurtion,          // in ms, 测试的持续时间.
             logfile,              // 日志文件位置. null则不会存储.
             errfile,              // 错误日志位置. null则不会存储.
+            debug,                // 指明debug则workCB在主线程运行, 并且不创建其他进程.
           }
 * @param workCB: function(pid, tid) {}  // 在此回调中编写测试程序.
 * @return: 
