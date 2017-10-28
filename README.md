@@ -1,8 +1,8 @@
 febs-test for server stress test;
 
-- [Install](#Install)
-- [Example](#Example)
-- [Interface](#Interface)
+- [Install](#install)
+- [Example](#example)
+- [Interface](#interface)
 
 # Install
 
@@ -151,7 +151,7 @@ function begin(type)
 /**
 * @desc: 结束指定的测试, 并记录统计结果.
 *        end_custom 可以指定除'request', 'timeout' 之外自定义的测试结果类型.
-* @return: 
+* @return token. 包含delay属性.
 */
 function end_success(token)
 function end_failure(token)
@@ -165,4 +165,16 @@ function end_custom(token, type)
 * @return: 
 */
 function add_count(type, count=1) 
+```
+
+```js
+/**
+ * 测试电脑性能, 并输出信息得到进程数的参考值.
+ * @param opt: 
+ *         {
+            minMemory,            // in byte, 保留的最小内存数.
+            logfile,              // 日志文件位置. null则不会存储.
+            }
+  */
+function testPerformance(opt)
 ```
