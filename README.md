@@ -51,7 +51,7 @@ function test_work(){ // or async function test_work() {
 // begin test.
 test.start({
             clientTotal: 100,          // 客户端总数.
-            clientNumPerProcess: 10,  // 每个进程模拟的客户端个数. 默认50个.
+            processNum: 10,            // 进程数. 默认50个.
             createDurtion: 5000,        // in ms, 模拟客户端在此时间段内创建完成. 默认10000
             testDurtion : 20000,          // in ms, 测试的持续时间.
           }, test_work);
@@ -116,7 +116,7 @@ Test take 12 s
 * @param opt: 
 *         {
             clientTotal,          // 客户端总数.
-            clientNumPerProcess,  // 每个进程模拟的客户端个数. 默认50个.
+            processNum,           // 进程数. 默认50个.
             createDurtion,        // in ms, 模拟客户端在此时间段内创建完成. 默认10000
             testDurtion,          // in ms, 测试的持续时间.
             logfile,              // 日志文件位置. null则不会存储.
